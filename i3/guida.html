@@ -1,0 +1,2188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.8" />
+<title>Guida all&#8217;assemblaggio del kit i3</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>Guida all&#8217;assemblaggio del kit i3</h1>
+<span id="author">Unterwelt</span><br />
+<span id="email"><code>&lt;<a href="mailto:info@unterwelt.it">info@unterwelt.it</a>&gt;</code></span><br />
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p>Questo documento vi guiderà passo passo nell&#8217;assemblaggio del kit i3 preparato dal laboratorio Unterwelt. Abbiamo fatto di tutto per semplificare i passaggi al massimo. Tutto quello che imparerete in queste fasi vi tornerà utile per capire come funziona la vostra macchina e per risolvere eventuali problemi.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_strumenti_necessari">1. Strumenti necessari</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Il kit contiene alcuni accessori, ma accertatevi di avere anche i seguenti strumenti:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+pinze/tenaglie
+</p>
+</li>
+<li>
+<p>
+chiave da 13 (meglio due)
+</p>
+</li>
+<li>
+<p>
+un cacciavite o una punta di trapano di diametro 3mm
+</p>
+</li>
+<li>
+<p>
+metro
+</p>
+</li>
+<li>
+<p>
+accendino
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Inoltre può farvi comodo una chiave da 6.</p></div>
+<div class="paragraph"><p>È importante che eseguiate l&#8217;assemblaggio su una <strong>superficie perfettamente piana</strong>.</p></div>
+<div class="paragraph"><p>Mettetevi comodi e cominciamo.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_assemblaggio_del_telaio">2. Assemblaggio del telaio</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Il primo passo è montare il piede al giunto in plastica. Usate:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+due viti M3 da 10mm
+</p>
+</li>
+<li>
+<p>
+due dadi M3
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Il giunto non è simmetrico, controllate che sia alto quanto il piede altrimenti giratelo.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9868.jpg" alt="images/_MG_9868.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9871.jpg" alt="images/_MG_9871.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Inserite il piede nell&#8217;asola del telaio. Usate anche qui:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+due viti M3 da 10mm
+</p>
+</li>
+<li>
+<p>
+due dadi M3
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Attenzione al verso: sia il piede sia il telaio devono essere orientati come in figura.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9874.jpg" alt="images/_MG_9874.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9875.jpg" alt="images/_MG_9875.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9876.jpg" alt="images/_MG_9876.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9877.jpg" alt="images/_MG_9877.jpg" />
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_assemblaggio_dell_8217_asse_y">3. Assemblaggio dell&#8217;asse Y</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Mettete da parte il telaio e procuratevi:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+dadi M8
+</p>
+</li>
+<li>
+<p>
+rondelle M8 (sia piccole sia grandi)
+</p>
+</li>
+<li>
+<p>
+due barre filettate lunghe (435mm)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Preparate le due barre come mostrato in foto.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Una delle due barre usa una rondella piccola al posto di una grande.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9879.jpg" alt="images/_MG_9879.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Aggiungete i quattro supporti alle estremità delle barre:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9880.jpg" alt="images/_MG_9880.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Completate la sequenza con una rondella piccola ed un dado M8 ad ogni estremità:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9882.jpg" alt="images/_MG_9882.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete due barre lisce da 405mm ed inseritele sui supporti come mostrato in figura. Spostate i supporti quanto occorre.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9883.jpg" alt="images/_MG_9883.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9884.jpg" alt="images/_MG_9884.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Adesso prendete le quattro barre filettate corte (225mm) e inserite la prima su due supporti, usando due rondelle e due dadi M8:</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">La barra di sinistra è quella con una sola rondella grande (l&#8217;altra ne ha due, ricordate?), e questa rondella grande deve essere rivolta verso il fondo!</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9886.jpg" alt="images/_MG_9886.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9887.jpg" alt="images/_MG_9887.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9888.jpg" alt="images/_MG_9888.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete un&#8217;altra barra filettata corta e preparatela come mostrato in foto.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Usate solo rondelle M8 piccole (la foto ne usa per errore due grandi).</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9892.jpg" alt="images/_MG_9892.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Inserite la barra nei due supporti e serratela da entrambe le parti con rondella e dado M8 (lasciate tutto lento per adesso, stringeremo dopo).</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9893.jpg" alt="images/_MG_9893.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9896.jpg" alt="images/_MG_9896.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Adesso prendete le ultime due barre filettate corte e preparatele come in foto:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9897.jpg" alt="images/_MG_9897.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Montate le barre sui supporti rimasti liberi:</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Attenzione al verso: il supporto per il motore deve essere rivolto verso l&#8217;interno.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9901.jpg" alt="images/_MG_9901.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>A questo punto prendete il telaio ed inserite l&#8217;asse Y come in foto:</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Attenzione al verso.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9902.jpg" alt="images/_MG_9902.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9903.jpg" alt="images/_MG_9903.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9910.jpg" alt="images/_MG_9910.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9911.jpg" alt="images/_MG_9911.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Le due barre filettate piccole devono essere posizionate appena in fondo alla forchetta in alluminio come mostrato nelle foto seguenti.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Allentate i dadi centrali (quelli in prossimità del telaio) per poter scorrere quanto serve.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9907.jpg" alt="images/_MG_9907.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9908.jpg" alt="images/_MG_9908.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Serrate le barre con rondelle e dadi M8:</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Diversamente dalla foto, mantenete anche la rondella tra la forchetta di alluminio e il supporto in plastica, così da avere rondelle su entrambi i lati della forchetta.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9905.jpg" alt="images/_MG_9905.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Ora che la posizione dell&#8217;asse Y è definita, verificate con il metro che le barre filettate formino un rettangolo. Quando siete soddisfatti, serrate tutti i dadi M8.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">È molto importante <strong>serrare con forza i dadi che fermano l&#8217;asse Y al telaio</strong> (quelli che in altre parole schiacciano le rondelle contro il telaio). Vi consigliamo di usare due chiavi da 13 per stringere contemporaneamente i dadi sulle due facce del telaio.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9914.jpg" alt="images/_MG_9914.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>A questo punto prendete <strong>tre</strong> cuscinetti lineari ed inseriteli nelle barre lisce come mostrato in figura:</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Ne va inserito <strong>solo uno</strong> sulla barra che sta dal lato del piede di alluminio, e <strong>due</strong> sull&#8217;altra.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9918.jpg" alt="images/_MG_9918.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9919.jpg" alt="images/_MG_9919.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete un motore e montatelo sul supporto come mostrato in figura usando due viti M3 da 10mm.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9949.jpg" alt="images/_MG_9949.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete una puleggia, infilatela sull&#8217;albero del motore e serratela con un chiave a brugola (fornita nel kit):</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9950.jpg" alt="images/_MG_9950.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9951.jpg" alt="images/_MG_9951.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Ora fate scorrere il motore e il suo supporto lungo le barre fino a centrare i denti della puleggia con l&#8217;asse centrale della stampante.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9952.jpg" alt="images/_MG_9952.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Fissate la posizione del motore serrando i dadi M8.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9954.jpg" alt="images/_MG_9954.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Allineate al centro anche il supporto della contropuleggia mostrato in figura.
+Inoltre inserite due cuscinetti e fissateli con una vite M4 da 30mm e relativo dado M4 (usate rondelle da ambo i lati).</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9956.jpg" alt="images/_MG_9956.jpg" />
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_assemblaggio_dell_8217_asse_z">4. Assemblaggio dell&#8217;asse Z</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Prendete i seguenti componenti:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+due motori
+</p>
+</li>
+<li>
+<p>
+due supporti per motori
+</p>
+</li>
+<li>
+<p>
+sei viti M3 da 16mm
+</p>
+</li>
+<li>
+<p>
+sei rondelle M3
+</p>
+</li>
+</ul></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9935.jpg" alt="images/_MG_9935.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete inoltre il tubetto di plastica fornito nel kit, tagliatelo a metà (ci servono due spezzoni) ed usate uno spezzone per giuntare la barra ad uno dei due motori. È un&#8217;operazione un po' faticosa perché il tubetto è (giustamente) molto stretto. Mandate la barra bene in fondo a contatto con l&#8217;albero del motore.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0091.jpg" alt="images/_MG_0091.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Ripetete l&#8217;operazione con l&#8217;altro motore.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Siccome abbiamo aggiunto questo passaggio tardivamente, le foto successive mostrano i motori senza le barre applicate.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Ora mettete da parte i motori e prendete i supporti in plastica. Montateli nella posizione mostrata nelle foto seguenti.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Visto che i buchi sul telaio hanno un po' di gioco, cercate di serrare le viti tenendo il supporto nella posizione più alta possibile (quindi verso l&#8217;alto del frame).</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9937.jpg" alt="images/_MG_9937.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9938.jpg" alt="images/_MG_9938.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Fissate i motori ai supporti usando sei viti M3 da 10mm con relative rondelle. Rivolgete i cavi del motore verso il telaio.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Anche se non è mostrato in figura, è consigliabile prendere i due switch con i cavi più lunghi (50cm e 62cm) e farli passare nel buco del telaio in basso a sinistra (con i due connettori verso il lato posteriore). Fate la stessa cosa con due cavi a 4 pin. È più facile farli passare ora che quando avremo montato il motore.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9941.jpg" alt="images/_MG_9941.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9945.jpg" alt="images/_MG_9945.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9946.jpg" alt="images/_MG_9946.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Ora prendete i seguenti componenti:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+switch con cavo da 62cm
+</p>
+</li>
+<li>
+<p>
+due viti M2
+</p>
+</li>
+<li>
+<p>
+due dadi M2
+</p>
+</li>
+<li>
+<p>
+supporto in plastica per switch (può differire leggermente da quello in foto)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Montateli rivolgendo la leva verso la base del supporto e troncate le viti in eccesso.
+Prendete due viti M3 da 16mm e due rondelle ed applicate il supporto al telaio:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0076.jpg" alt="images/_MG_0076.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Serrare dietro il telaio con due dadi e due rondelle M3.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_assemblaggio_del_piano_di_stampa">5. Assemblaggio del piano di stampa</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Prendete i seguenti componenti:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9920.jpg" alt="images/_MG_9920.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Inserite una fascetta in ciascun supporto:</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Nel supporto c'è un intaglio su uno dei due lati: inserite la fascetta in modo che la sua "testa" sia dalla parte opposta all&#8217;intaglio.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9921.jpg" alt="images/_MG_9921.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9922.jpg" alt="images/_MG_9922.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Montate i supporti al telaio usando:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+viti M3 da 16mm
+</p>
+</li>
+<li>
+<p>
+dadi M3
+</p>
+</li>
+<li>
+<p>
+rondelle M3
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Lasciate le viti un po' lente.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Attenzione al verso: il piano non è simmetrico! Posizionatelo come in foto controllando i buchi.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9925.jpg" alt="images/_MG_9925.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9923.jpg" alt="images/_MG_9923.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9924.jpg" alt="images/_MG_9924.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Ora montate il tendicinghia (sempre con viti M3 da 16mm, dadi e rondelle):</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9929.jpg" alt="images/_MG_9929.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Ora prendete i seguenti componenti:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+switch con cavo da 50cm
+</p>
+</li>
+<li>
+<p>
+due viti M2
+</p>
+</li>
+<li>
+<p>
+due dadi M2
+</p>
+</li>
+<li>
+<p>
+supporto in plastica per switch (può differire leggermente da quello in foto)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Montateli come mostrato in foto:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9931.jpg" alt="images/_MG_9931.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9932.jpg" alt="images/_MG_9932.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Troncate le viti in eccesso:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9933.jpg" alt="images/_MG_9933.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Montate il supporto nella posizione mostrata in foto, usando:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+due viti M3 da 10mm
+</p>
+</li>
+<li>
+<p>
+due dadi M3
+</p>
+</li>
+<li>
+<p>
+rondelle M3
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>I fori sul telaio metallico hanno un po' di gioco: serrate il supporto tenendolo il più possibile vicino al tendicinghia.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9975.jpg" alt="images/_MG_9975.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Appoggiate il piano sui tre cuscinetti:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9977.jpg" alt="images/_MG_9977.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9979.jpg" alt="images/_MG_9979.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Girate la stampante e serrate le fascette intorno ai cuscinetti.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9982.jpg" alt="images/_MG_9982.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9983.jpg" alt="images/_MG_9983.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Verificate che il carrello scorra bene e serrate tutte le viti che tengono i supporti dei cuscinetti e il supporto metallico.</p></div>
+<div class="paragraph"><p>Prendere la cinghia e tagliarne un pezzo da 73cm; lo useremo per il nostro asse Y. Inseritene una estremità nei denti del tendicinghia.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9985.jpg" alt="images/_MG_9985.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9986.jpg" alt="images/_MG_9986.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Fate passare la cinghia intorno alla puleggia del motore e alla contropuleggia dalla parte opposta:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9989.jpg" alt="images/_MG_9989.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Inserite quindi l&#8217;altra estremità nei denti del tendicinghia. La cinghia deve risultare abbastanza tesa.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9987.jpg" alt="images/_MG_9987.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete il piano riscaldato e quattro viti M3 da 20mm. Applicatele ai quattro angoli serrandole al piano usando per ciascuna due dadi:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0014.jpg" alt="images/_MG_0014.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Aggiungere un terzo dado alle due viti che si troveranno verso il retro della stampante (quindi vicine all&#8217;alto delle scritte sul piano).</p></div>
+<div class="paragraph"><p>Applicare il piano riscaldato al suo telaio.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">La foto mostra erroneamente tre dadi anche nelle viti frontali. Come scritto, i dadi devono essere <strong>due</strong> nelle viti frontali e <strong>tre</strong> nelle viti posteriori (useremo questa differenza per regolare l&#8217;orizzontalità del piano facendo cerniera sulle viti posteriori).</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0015.jpg" alt="images/_MG_0015.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Serrare le viti al telaio usando una rondella e un ulteriore dado.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0016.jpg" alt="images/_MG_0016.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Collocare il vetro sul piano riscaldato e fissarlo con le clip fornite nel kit:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0077.jpg" alt="images/_MG_0077.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0078.jpg" alt="images/_MG_0078.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0079.jpg" alt="images/_MG_0079.jpg" />
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_assemblaggio_dell_8217_asse_x">6. Assemblaggio dell&#8217;asse X</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Prendete i componenti mostrati in figura:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9957.jpg" alt="images/_MG_9957.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Inserite i cuscinetti facendo pressione sul terminale in plastica (due cuscinetti per ciascun terminale, uno da una parte e uno dall&#8217;altra):</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9958.jpg" alt="images/_MG_9958.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9959.jpg" alt="images/_MG_9959.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete due dadi M5 ed inseriteli nell&#8217;apposito alloggiamento presente in entrambi i pezzi.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Prima, verificate che i fori passanti siano sufficientemente larghi da far passare la barra M5; in caso contrario allargateli con un cacciavite senza farvi troppi scrupoli.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9960.jpg" alt="images/_MG_9960.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9961.jpg" alt="images/_MG_9961.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9962.jpg" alt="images/_MG_9962.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete lo switch con il cavo lungo 35cm e montatelo usando due viti e due dadi M2 come in foto:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9963.jpg" alt="images/_MG_9963.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9964.jpg" alt="images/_MG_9964.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete un motore e fissatelo al terminale in plastica usando quattro viti M3 da 20m (e relative rondelle). Rivolgete i cavi del motore verso lo switch.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9965.jpg" alt="images/_MG_9965.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete una puleggia ed applicatela all&#8217;albero del motore. Serratela solo dopo averne allineato i denti con l&#8217;asola attraverso cui passerà la cinghia.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9967.jpg" alt="images/_MG_9967.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9968.jpg" alt="images/_MG_9968.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete due cuscinetti piccoli ed installateli nell&#8217;altro terminale con una vite M4, un dado M4 e relative rondelle:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9969.jpg" alt="images/_MG_9969.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete due barre lisce da 343mm ed inseritele in uno dei due terminali come mostrato in foto.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9971.jpg" alt="images/_MG_9971.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete tre cuscinetti lineari ed inseriteli come mostrato in figura:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9972.jpg" alt="images/_MG_9972.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete due barre lisce da 320mm ed inseritele nei cuscinetti (delicatamente! per non danneggiare i cuscinetti):</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9999.jpg" alt="images/_MG_9999.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0001.jpg" alt="images/_MG_0001.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Inserite le barre lisce nei fori sui supporti dei motori Z (aggiustate la larghezza dei terminali in base a questa distanza).</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Siccome a differenza di queste foto avete già montato le barre filettate sui motori, dovrete avvitarle dentro i dadi M5 finché l&#8217;asse X non è orizzontale (non c'è bisogno di usare una livella, basta fare ad occhio: faremo più avanti una calibrazione più precisa).</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0003.jpg" alt="images/_MG_0003.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0012.jpg" alt="images/_MG_0012.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0013.jpg" alt="images/_MG_0013.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Fissate la sommità delle barre usando i supporti mostrati nella foto seguente. Usate per ciascuno due viti M3 da 16mm, due dadi e due rondelle.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0006.jpg" alt="images/_MG_0006.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0007.jpg" alt="images/_MG_0007.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete il carrello ed applicateci sei fascette:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0018.jpg" alt="images/_MG_0018.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0019.jpg" alt="images/_MG_0019.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Montate il carrello sui cuscinetti come mostrato nella foto seguente.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Attenzione al verso: la parte liscia del carrello deve essere rivolta verso il lato anteriore della stampante (quindi i cuscinetti devono rimanere rivolti verso il lato posteriore).</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0020.jpg" alt="images/_MG_0020.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0021.jpg" alt="images/_MG_0021.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Montate la cinghia come mostrato in foto:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0022.jpg" alt="images/_MG_0022.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0023.jpg" alt="images/_MG_0023.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0024.jpg" alt="images/_MG_0024.jpg" />
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_assemblaggio_dell_8217_estrusore">7. Assemblaggio dell&#8217;estrusore</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Forate il condotto dell&#8217;estrusore usando un cacciavite di diametro 3mm.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">In alternativa è possibile usare una punta di trapano, ma <strong>a mano</strong> perché la velocità del trapano può squagliare la plastica per il calore.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0026.jpg" alt="images/_MG_0026.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0025.jpg" alt="images/_MG_0025.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0027.jpg" alt="images/_MG_0027.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete la bustina dei componenti dell&#8217;estrusore:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0028.jpg" alt="images/_MG_0028.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Inserite tre dadi M3 negli appositi alloggiamenti:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0052.jpg" alt="images/_MG_0052.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Inserite due cuscinetti negli appositi alloggiamenti:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0029.jpg" alt="images/_MG_0029.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0030.jpg" alt="images/_MG_0030.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete un motore ed installatelo come mostrato in figura usando tre viti M3 da 10mm e tre rondelle:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0034.jpg" alt="images/_MG_0034.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete la vite M4 lunga ed inseritela dall&#8217;esterno:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0036.jpg" alt="images/_MG_0036.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Inserite il primo ingranaggio lungo la vite:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0037.jpg" alt="images/_MG_0037.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Inserite anche l&#8217;ingranaggio più grande e mandate a fondo la vite:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0038.jpg" alt="images/_MG_0038.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Ora aggiungete l&#8217;ultimo ingranaggio all&#8217;albero del motore. Spingetelo in fondo in modo che non abbia gioco con l&#8217;ingranaggio grande.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0041.jpg" alt="images/_MG_0041.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Versate un po' di frenafiletti (threadlocker) nell&#8217;alloggiamento dei grani a brugola e serrateli con forza, avendo cura di allinearli e stringerli sul lato piatto della vite M4.</p></div>
+<div class="paragraph"><p>Prendete il componente mostrato in figura, fate passare la barretta M8 all&#8217;interno del cuscinetto grande e applicate un po' di forza per farla entrare a scatto:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0042.jpg" alt="images/_MG_0042.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0043.jpg" alt="images/_MG_0043.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Inserite un dado M3 nell&#8217;alloggiamento interno:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0044.jpg" alt="images/_MG_0044.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Montate il componente sull&#8217;estrusore usando una vite M3 da 25mm (senza stringere troppo altrimenti poi sarà difficile aprirlo e chiuderlo):</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0045.jpg" alt="images/_MG_0045.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0046.jpg" alt="images/_MG_0046.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete la vite M4 da 60mm ed inseritela come mostrato:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0049.jpg" alt="images/_MG_0049.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Adesso prendete l&#8217;adattatore mostrato in figura e montatelo con due viti M3 da 30mm:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0050.jpg" alt="images/_MG_0050.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0051.jpg" alt="images/_MG_0051.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Ora si può montare l&#8217;estrusore usando le stesse viti che andranno a prendere i dadi preparati in precedenza:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0053.jpg" alt="images/_MG_0053.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0054.jpg" alt="images/_MG_0054.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Completate il montaggio con la terza vite M3 da 20mm:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0055.jpg" alt="images/_MG_0055.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Completate l&#8217;estrusore con una molla, due rondelle M4 e il dado a farfalla:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0056.jpg" alt="images/_MG_0056.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete la hot-end ed inseritela nel supporto, rivolgendo i cavi verso la parte posteriore (il supporto può differire leggermente da quello mostrato in foto):</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0057.jpg" alt="images/_MG_0057.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Montate il supporto usando due viti M3 da 16mm, due rondelle e due dadi come mostrato nella figura seguente.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Se avete un cacciavite lungo (diametro max 3mm) verificate l&#8217;allineamento del condotto.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0058.jpg" alt="images/_MG_0058.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete la ventola e montatela usando due viti autofilettanti:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0060.jpg" alt="images/_MG_0060.jpg" />
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cablaggio">8. Cablaggio</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Cominceremo dal motore X. Tagliate i suoi cavi dopo una decina di centimetri.</p></div>
+<div class="paragraph"><p>Prendete un cavo a 4 pin e tagliatelo in modo tale che la <strong>lunghezza totale</strong> (dal connettore al motore) sia di <strong>28cm</strong>.</p></div>
+<div class="paragraph"><p>Sguainate tutti i conduttori per una lunghezza di circa 6mm.</p></div>
+<div class="paragraph"><p>Tagliate quattro pezzi di guaina termorestringente <strong>piccola</strong> lunghi 15mm ciascuno ed inseriteli come mostrato:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0061.jpg" alt="images/_MG_0061.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Unite il conduttore al corrispettivo sul cavo e girateli insieme saldamente. Aiutatevi con delle pinzette per ottenere una giunzione stretta e affusolata al tempo stesso. Se avete un saldatore, potete aggiungere una punta di stagno per irrobustire il contatto.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0062.jpg" alt="images/_MG_0062.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Far scorrere la guaina sul contatto:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0062.jpg" alt="images/_MG_0062.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Usare il calore dell&#8217;accendino per far stringere la guaina intorno al contatto e ai cavi:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0064.jpg" alt="images/_MG_0064.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Ripetere l&#8217;operazione per i restanti tre cavi.</p></div>
+<div class="paragraph"><p>Poi prendere un altro cavo da 4 pin e giuntarlo al motore Y (quello che si trova sotto il piano di stampa). La lunghezza totale tra connettore e motore deve essere di <strong>59cm</strong>.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Prima di eseguire la giunzione, far passare il cavo del connettore attraverso il foro che si trova dietro il motore Z di sinistra come mostrato in figura (se non lo avete già fatto in precedenza):</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_9996.jpg" alt="images/_MG_9996.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Passeremo poi ai due motori Z che saranno cablati in parallelo. Prendiamo i cavi insieme e tagliamoli approssimativamente alla lunghezza mostrata nella foto seguente.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Devono passare sotto tutte le barre.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0065.jpg" alt="images/_MG_0065.jpg" />
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0066.jpg" alt="images/_MG_0066.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Anche in questo caso fate passare il cavo a 4 pin dentro il buco che si trova dietro il motore di sinistra prima di effettuare la giunzione. Per questa giunzione usate la guaina termorestringente più larga.</p></div>
+<div class="paragraph"><p>Effettuate infine la giunzione del motore dell&#8217;estrusore, il quale deve avere una lunghezza totale (dal connettore al motore) di <strong>45cm</strong>.</p></div>
+<div class="paragraph"><p>Prendete poi il cavo a doppino senza connettore ed usatelo per giuntare il cavo della ventola. La distanza totale tra ventola ed estremità libera del cavo deve essere di
+60cm*.</p></div>
+<div class="paragraph"><p>Ora prendete l&#8217;elettronica e montate la scheda RAMPS sulla scheda Arduino (se non è già stato fatto). Prendete <strong>quattro</strong> viti M3 da 30mm e preparatele con <strong>tre</strong> dadi come in foto:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0067.jpg" alt="images/_MG_0067.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Montate l&#8217;elettronica al telaio, rivolgendo il connettore USB verso il basso:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0068.jpg" alt="images/_MG_0068.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Collegate l&#8217;estrusore ai primi due terminali a vite della scheda (D10), la polarità è indifferente.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Fate passare tutti i cavi dell&#8217;estrusore <strong>sopra</strong> le barre.</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0069.jpg" alt="images/_MG_0069.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Collegate il piano riscaldato al terminale D8 (polarità indifferente):</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0070.jpg" alt="images/_MG_0070.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Collegate:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+i motori ai pin segnati in blu (rivolgete i contatti rossi del motore verso l&#8217;alto della scheda)
+</p>
+</li>
+<li>
+<p>
+gli switch ai pin segnati in rosso (l&#8217;ordine degli switch partendo dal <strong>basso</strong> è X, Y, Z)
+</p>
+</li>
+<li>
+<p>
+il termistore dell&#8217;estrusore ai pin segnati in verde (polarità indifferente)
+</p>
+</li>
+<li>
+<p>
+il termistore del piano riscaldato ai pin segnati in viola (polarità indifferente)
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Il connettore degli switch va inserito in modo che i due contatti collegati effettivamente allo switch vadano ai due pin a sinistra. In altre parole, il pin a destra sulla scheda resterà non collegato.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Consigliamo di far passare il cavo dello switch dell&#8217;asse Y (quello collocato sotto il piano di stampa) nel buco grande presente nel suo telaio, in modo che esca di fianco tra il piano riscaldato e il telaio insieme agli altri cavi del piano.</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/RAMPS_top.jpg" alt="images/RAMPS_top.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete il cavo di alimentazione e rimuovere il plug (qualora presente):</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0071.jpg" alt="images/_MG_0071.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Collegate il cavo all&#8217;alimentatore:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0072.jpg" alt="images/_MG_0072.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Prendete il cavo bipolare fornito nel kit e collegatelo come mostrato nella foto che segue.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Se il cavo fornito è di colore rosso e nero, collegare il rosso a "+V" e il nero a "COM". Se è rosso e bianco, collegare il rosso a "+V" e il bianco a "COM".</td>
+</tr></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0073.jpg" alt="images/_MG_0073.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Tagliate tale cavo in due e collegate il nuovo spezzone ad un&#8217;altra coppia di morsetti "+V" e "COM" sull&#8217;alimentatore. Di fatto dovranno partire dall&#8217;alimentatore due linee a 12V.</p></div>
+<div class="paragraph"><p>Collegate le due linee ai quattro morsetti in basso a destra nella scheda elettronica, facendo <strong>molta</strong> attenzione a rispettare la polarità segnata sulla scheda:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+COM (quindi blu o nero o bianco): negativo (-)
+</p>
+</li>
+<li>
+<p>
+<code>V (quindi marrone o rosso): positivo (</code>)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Ad una delle due coppie di morsetti a vostra scelta collegate anche la ventola, sempre rispettando la polarità.</p></div>
+<div class="paragraph"><p>A questo punto potete usare le fascette per riordinare un po' i cavi che girano per la vostra stampante.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_software">9. Software</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Scaricate il <a href="http://arduino.cc/en/Main/Software">software di Arduino</a> e installate il driver FTDI in esso contenuto.</p></div>
+<div class="paragraph"><p>Scaricate anche <a href="http://koti.kapsi.fi/%7Ekliment/printrun/">Pronterface</a> e <a href="http://slic3r.org/">Slic3r</a>.</p></div>
+<div class="paragraph"><p>Collegate il cavo USB alla scheda e al computer. Lasciate l&#8217;alimentatore scollegato.</p></div>
+<div class="paragraph"><p>Aprite Pronterface. Selezionate in alto una velocità di connessione di 250000 e la porta seriale corrispondente alla vostra stampante, poi cliccate "Connetti".</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">Non potendo indicarvi quale sarà il nome della porta sul vostro computer, potete tranquillamente provarle tutte finché non riuscite a connettervi.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Cliccate sul bottone "Check temp". Pronterface visualizzerà la temperatura rilevata dai due termistori (quello sull&#8217;estrusore e quello sul piano riscaldato): corrisponderà alla vostra temperatura ambiente.</p></div>
+<div class="paragraph"><p>A questo punto collegate l&#8217;alimentatore della stampante. La ventola comincerà a girare (se non gira, fermatevi qui e cercate di capire perché: forse avete invertito la sua polarità?).</p></div>
+<div class="paragraph"><p>Ora premete il bottone che rappresenta una casa con scritto "X". Questo eseguirà l&#8217;homing dell&#8217;asse X, ossia porterà il carrello tutto a sinistra finché non toccherà lo switch.</p></div>
+<div class="paragraph"><p>Fate altrettanto con l&#8217;asse Y: il piano verrà verso di voi.</p></div>
+<div class="paragraph"><p>A questo punto potete provate a muovere gli assi X e Y usando i comandi manuali di Pronterface. Non toccate l&#8217;asse Z prima di avere eseguito la calibrazione descritta nel prossimo paragrafo.</p></div>
+<div class="paragraph"><p>Se i motori si muovono a scatti, dovete regolare la corrente sui singoli driver (noti anche come Pololu). Prendete un piccolo cacciavite a taglio, meglio se in plastica, e regolate i piccoli potenziometri presenti sul driver corrispondente al motore che state regolando. Girando in senso orario aumenterete la corrente, in senso antiorario la diminuirete.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_calibrazione_asse_z">10. Calibrazione asse Z</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Ora dobbiamo regolare l&#8217;altezza dello switch dell&#8217;asse Z in modo che l&#8217;asse si arresti esattamente quando tra la punta dell&#8217;estrusore e il piano ci sono 0mm. Bisogna però stare attenti a non andare oltre perché si potrebbe rompere il vetro.</p></div>
+<div class="paragraph"><p>A questo scopo prendete un foglio di carta e piegatelo due volte: regoleremo il nostro switch in modo da arrestare la discesa quando solo quel foglio di carta può passare tra estrusore e piano.</p></div>
+<div class="paragraph"><p>Inizialmente portate lo switch nella posizione più alta possibile e serrate le viti.
+Poi premete il tasto di homing di Z in Pronterface (quello con l&#8217;icona di una casa e la Z): il carrello comincerà a scendere fino ad arrestarsi.</p></div>
+<div class="paragraph"><p>Ora, gradualmente abbassate l&#8217;endstop e riprovate a fare l&#8217;homing, verificando la distanza dal piano con il foglio di carta. Questa fase è delicata ed importante: anche se non è molto divertente fatela con attenzione e pazienza.</p></div>
+<div class="paragraph"><p>Vi sarete accorti a questo punto che è molto importante che il piano di stampa sia perfettamente orizzontale, altrimenti avrete altezze diverse nei suoi diversi punti. Dovrete quindi regolarlo in questo modo:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+per regolarne la pendenza lungo l&#8217;asse Y, regolate i dadi che lo fermano al suo telaio (ricordate che davanti ne abbiamo messi solo due mentre dietro tre? regolate quelli frontali facendo cerniera su quelli posteriori)
+</p>
+</li>
+<li>
+<p>
+per regolare l&#8217;orizzontalità lungo l&#8217;asse X, invece, girate una delle due barre filettate di Z (se non riuscite a girarle, cliccate su "Motors Off" in Pronterface)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Ritenetevi soddisfatti della vostra calibrazione solo se:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+facendo l&#8217;homing di Z l&#8217;estrusore si arresta vicinissimo al piano di stampa, quasi toccandolo
+</p>
+</li>
+<li>
+<p>
+la distanza tra estrusore e piano è la stessa in tutti i punti del piano
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_provare_l_8217_estrusore">11. Provare l&#8217;estrusore</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Allentate la farfalla ed inserite il filamento fino in fondo:</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0083.jpg" alt="images/_MG_0083.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Stringete nuovamente la farfalla (la molla deve essere molto compressa):</p></div>
+<div class="imageblock">
+<div class="content">
+<img src="images/_MG_0084.jpg" alt="images/_MG_0084.jpg" />
+</div>
+</div>
+<div class="paragraph"><p>Ora da Pronterface impostate una temperatura di 190°C per l&#8217;estrusore (heater) ed una di 70°C per il piano riscaldato.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note" />
+</td>
+<td class="content">190°C è una buona temperatura di partenza per il PLA, mentre l&#8217;ABS richiede almeno 230°C.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Abilitando il comando "Monitor Printer" Pronterface verificherà costantemente la temperatura della stampante. Quando il riscaldamento sarà completo, potrete cliccare su "Extrude" per verificare che&#8230; beh, potete immaginare cosa succederà.</p></div>
+<div class="paragraph"><p>Ricordatevi di spegnere le temperature ad operazione terminata.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_la_prima_stampa">12. La prima stampa</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Adesso è arrivato il momento di scaricare un oggetto di prova da <a href="http://www.thingiverse.com/">Thingiverse</a>, come questo <a href="http://www.thingiverse.com/download:17274">cubetto</a> che è ottimo per iniziare.</p></div>
+<div class="paragraph"><p>Aprite Slic3r e configurate le seguenti impostazioni:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>Printer Settings</em> &#8594; <em>Nozzle Diameter</em>: 0.35 (oppure 0.5 se avete chiesto questa dimensione nel kit)
+</p>
+</li>
+<li>
+<p>
+<em>Filament Settings</em> &#8594; <em>Extruder (first layer)</em>: 195
+</p>
+</li>
+<li>
+<p>
+<em>Filament Settings</em> &#8594; <em>Extruder (other layers)</em>: 190
+</p>
+</li>
+<li>
+<p>
+<em>Filament Settings</em> &#8594; <em>Bed (first layer)</em>: 75
+</p>
+</li>
+<li>
+<p>
+<em>Filament Settings</em> &#8594; <em>Bed (other layers)</em>: 70
+</p>
+</li>
+<li>
+<p>
+<em>Print Settings</em> &#8594; <em>Layers and perimeters</em> &#8594; <em>First layer height</em>: 0.35 (oppure 0.5 se avete un estrusore da 0.5)
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Se avete un calibro, misurate esattamente il diametro del vostro filamento (fatelo in più punti) ed inserite il valore nel campo <em>Filament Settings</em> &#8594; <em>Filament</em> &#8594; <em>Diameter</em>.</p></div>
+<div class="paragraph"><p>Ora cliccate su "Plater" e caricate il file STL del vostro cubetto usando il tasto "Add&#8230;". Cliccate poi su "Export G-code&#8230;" per salvare il file G-code contenente il vostro cubetto trasformato in istruzioni per la stampante.</p></div>
+<div class="paragraph"><p>Tornate su Pronterface, aprite il file G-code usando il tasto "Load file" e poi cliccate su "Print".</p></div>
+<div class="paragraph"><p>Buon divertimento!</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_suggerimenti">13. Suggerimenti</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Pulite periodicamente la superficie di stampa con alcol o acetone per rimuovere il grasso lasciato dalle vostre ditate, che causa una cattiva adesione delle stampe.
+</p>
+</li>
+<li>
+<p>
+Per stampare in ABS bisogna scaldare il piano riscaldato fino a 100-110°C. Inoltre è consigliabile spruzzare sul vetro della lacca per capelli oppure rivestirlo di nastro di Kapton (facilmente reperibile via Internet).
+</p>
+</li>
+<li>
+<p>
+Due opzioni importanti in Slic3r su cui agire per migliorare la vostra qualità sono la temperatura di estrusione (provate a tenerla il più bassa possibile) e l&#8217;Extrusion Multiplier (sezione Filament Settings) che consente di compensare l&#8217;eccesso o la carenza di materiale estruso; in entrambi i casi fate variazioni molto piccole tra una prova e l&#8217;altra.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_link">14. Link</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Un&#8217;ottima guida a Slic3r è <a href="http://richrap.blogspot.it/2012/01/slic3r-is-nicer-part-1-settings-and.html">Slic3r is Nicer</a>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2013-01-01 13:24:54 CET
+</div>
+</div>
+</body>
+</html>
